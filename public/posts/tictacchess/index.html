@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Tictacchess | Charly&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="Github
+
+In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the Minimax algorithm and bitboards optimization.
+Rules of TicTacChess
+The TicTacChess is a variation of the TicTacToe which includes chess pieces instead of crosses and circles. It&rsquo;s played by 2 players on a 4x4 board, each player has four pieces including a pawn, a knight, a bishop and a rook. Each player play successively by either moving a piece, eating a enemy piece or placing a dead piece on an empty square of the board. A party is over when one of the player aligned all its pieces in a horizontal, vertical or diagonal line.">
+<meta name="author" content="">
+<link rel="canonical" href="https://charlyalizadeh.github.io/posts/tictacchess/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://charlyalizadeh.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://charlyalizadeh.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://charlyalizadeh.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://charlyalizadeh.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://charlyalizadeh.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://charlyalizadeh.github.io/posts/tictacchess/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://charlyalizadeh.github.io/posts/tictacchess/">
+  <meta property="og:site_name" content="Charly&#39;s Blog">
+  <meta property="og:title" content="Tictacchess">
+  <meta property="og:description" content="Github In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the Minimax algorithm and bitboards optimization.
+Rules of TicTacChess The TicTacChess is a variation of the TicTacToe which includes chess pieces instead of crosses and circles. It’s played by 2 players on a 4x4 board, each player has four pieces including a pawn, a knight, a bishop and a rook. Each player play successively by either moving a piece, eating a enemy piece or placing a dead piece on an empty square of the board. A party is over when one of the player aligned all its pieces in a horizontal, vertical or diagonal line.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-03T10:45:25+01:00">
+    <meta property="article:modified_time" content="2024-01-03T10:45:25+01:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tictacchess">
+<meta name="twitter:description" content="Github
+
+In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the Minimax algorithm and bitboards optimization.
+Rules of TicTacChess
+The TicTacChess is a variation of the TicTacToe which includes chess pieces instead of crosses and circles. It&rsquo;s played by 2 players on a 4x4 board, each player has four pieces including a pawn, a knight, a bishop and a rook. Each player play successively by either moving a piece, eating a enemy piece or placing a dead piece on an empty square of the board. A party is over when one of the player aligned all its pieces in a horizontal, vertical or diagonal line.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://charlyalizadeh.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tictacchess",
+      "item": "https://charlyalizadeh.github.io/posts/tictacchess/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Tictacchess",
+  "name": "Tictacchess",
+  "description": "Github In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the Minimax algorithm and bitboards optimization.\nRules of TicTacChess The TicTacChess is a variation of the TicTacToe which includes chess pieces instead of crosses and circles. It\u0026rsquo;s played by 2 players on a 4x4 board, each player has four pieces including a pawn, a knight, a bishop and a rook. Each player play successively by either moving a piece, eating a enemy piece or placing a dead piece on an empty square of the board. A party is over when one of the player aligned all its pieces in a horizontal, vertical or diagonal line.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Github In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the Minimax algorithm and bitboards optimization.\nRules of TicTacChess The TicTacChess is a variation of the TicTacToe which includes chess pieces instead of crosses and circles. It’s played by 2 players on a 4x4 board, each player has four pieces including a pawn, a knight, a bishop and a rook. Each player play successively by either moving a piece, eating a enemy piece or placing a dead piece on an empty square of the board. A party is over when one of the player aligned all its pieces in a horizontal, vertical or diagonal line.\nBitboard A bitboard is an integer representing a board. In regular chess a board has a dimension of 8 * 8 = 64 which is, when we think about it, kind of a big coincidence with the fact that modern computer are based of 64 bits processors. In a bitboard integer, when a bit is set at the index n it means that a piece occupies this square. In the following board an upper letter represents a white piece and a lower letter a black piece, next to it you can see a bitboard representing its occupancy (meaning that we can only retrieve information about whether a square is occupied or not but not by which piece).\n┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓ 8┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫ 7┃ R ┃ ┃ ┃ ┃ ┃ p ┃ k ┃ ┃ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫ 6┃ ┃ ┃ ┃ ┃ ┃ p ┃ ┃ ┃ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫ 5┃ ┃ p ┃ ┃ r ┃ ┃ ┃ ┃ p ┃ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫ 4┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ 8 00000000 ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫ 7 10000109 3┃ P ┃ ┃ ┃ ┃ ┃ K ┃ P ┃ ┃ 6 00000100 ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫ 5 01010001 2┃ ┃ ┃ ┃ ┃ ┃ P ┃ ┃ P ┃ 4 00000000 ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫ 3 10000110 1┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ 2 00000101 ┗━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┛ 1 00000000 a b c d e f g h abcdefgh 00000000\u003c--End of the integer 10000110 00000100 01010001 00000000 10000110 00000101 Begginging of the integer--\u003e00000000 To store all the information about a board we actually need multiple bitboards, one for each piece type/color.\nIn the case of TicTacChess we doesn’t need a full 64 integer to represent a 4x4 board. Our board has 16 squares but we cannot use a 16 bits integer, indeed when computing if four pieces are aligned we use bitshifting and AND operator like so:\n0000 0000 0000 0000 0000 1111 0111 0011 0001 0001 0000 \u0026 1000 \u0026 1100 \u0026 1110 = 0000 0000 0000 0000 0000 0000 In this case we don’t have any problems, but let’s analyse the following board:\n0001 0000 0000 0000 0000 1110 1111 0111 0011 0010 0000 \u0026 0000 \u0026 1000 \u0026 1100 = 0000 0000 0000 0000 0000 0000 We can see in the original board is not a winning board however our algorithm will detect a win. To overcome this issues we had a “ghost” column:\n00010 00001 00000 00000 00000 11100 01110 10111 01011 00000 00000 \u0026 00000 \u0026 00000 \u0026 10000 = 00000 00000 00000 00000 00000 00000 ^ | Ghost column So in order to use board with a ghost column we need to take the size above 16 bits integer which is 32 bits integer, here an example:\n┏━━━┳━━━┳━━━┳━━━┓ 4┃ ┃ ┃ ┃ ┃ ┣━━━╋━━━╋━━━╋━━━┫ 3┃ P ┃ ┃ p ┃ ┃ ┣━━━╋━━━╋━━━╋━━━┫ 2┃ ┃ k ┃ R ┃ ┃ 4 00000000000000000 ┣━━━╋━━━╋━━━╋━━━┫ 3 10100 1┃ ┃ B ┃ ┃ ┃ 2 01100 ┗━━━┻━━━┻━━━┻━━━┛ 1 01000 a b c d abcd Magic Bitboard Introduction I’ll use the following representation of a chess board to illustrate the magic bitboard:\nrhbqkbhr pppppppp ........ ........ ........ ........ PPPPPPPP RHBQKBHR Description: r: black rook h: black knight b: black bishop q: black queen k: black king p: black pawn R: white rook H: white knight B: white bishop Q: white queen K: white king P: white pawn .: empty cell And when I’ll talk about bitboard more specifically I’ll use the following representation:\n11111111 \u003c-- end of the integer 11111111 ........ ........ ........ ........ 11111111 start of the integer --\u003e 11111111 where . corresponds to a 0 in the 64-bits integer Why One feature of a chess engine is to know where a piece can move in function of the board state. One category of pieces is called “sliding piece”, this category includes the rooks, the bishops and the queen. All those pieces have the particularity that they can slide on board “indefinitely” until another piece or the border of the board blocks it.\nThis characteristic makes their possible moves hard to generate. But thanks to some passionate peoples several techniques have been created that allow for fast computation of the possible moves of a sliding piece given its type, position and board state. In this tutorial we’ll focus mainly on the technique called “magic bitboard”.\nHow Key space reduction The idea behind magic bitboard is to create a map for each combination of piece type and position that contains all the possible moves for all the combination of board state. You can see a magic bitboard as a function that takes as input the piece type/position and the board state and returns the legal move for this piece.\nmagic(piece_type, position, board_state) = legal_moves Or more visually:\n........ ........ ........ ........ ........ 1....... ........ .....1.. .1...1.. ........ ........ ..1.1... magic(bishop, ...1...., ........) = ........ ........ ........ ..1.1... ........ ........ .1...1.. ........ ........ 1.....1. Note: we don't care about the piece color when using magic bitboard. Indeed if the other piece on the board is of the same color we only need to remove the same piece color from the legal_moves (using bit operation). In this example we would obtain: ........ 1....... .1...... ..1.1... ........ ..1.1... .1...1.. 1.....1. As you can expect we can not store all the possible combination of piece type, position and board state in the keys of map, there are way to many of them. There are two observations we can make that’ll let us reduce the key space drastically:\nWe only need to take into account pieces that are on the trajectory (also called attacks) of the piece Some combination of piece type, position and board state have the same legal moves (see example bellow) ........ ........ ........ ........ ........ 1....... ........ .....1.. .1...1.. ........ ........ ..1.1... magic(bishop, ...1...., ........) = ........ ........ ........ ..1.1... ........ ........ .1...1.. ........ ........ 1.....1. ........ ........ ........ ........ .....1.. 1....... ........ ....1... .1...1.. ........ ........ ..1.1... magic(bishop, ...1...., ........) = ........ ........ ........ ..1.1... ........ ........ .1...1.. ........ ........ 1.....1. ........ .......1 ........ ........ ........ 1....... ........ .....1.. .1...1.. ........ ........ ..1.1... magic(bishop, ...1...., ........) = ........ ........ ........ ..1.1... ........ ........ .1...1.. ........ ........ 1.....1. In order to use the first observation at our advantage we use bit masking to get only the relevant pieces of board.\nFor example let’s take the following board with a bishop on d4 (1 denotes a piece, we don’t care which one in this example):\n8 ........ 7 ........ 6 .....1.. 5 ...1.... 4 .1.b.... 3 ........ 2 ...1...1 1 .1....11 abcdefgh On this board the only relevant pieces in order to get the bishop moves are the ones on its diagonals, i.e:\n8 .......1 7 1.....1. 6 .1...1.. 5 ..1.1... 4 ........ 3 ..1.1... 2 .1...1.. 1 1.....1. abcdefgh To get the board with only the relevant pieces we use the bitwise and operator (also denoted \u0026 in C/C++)\n.......1 ........ ........ 1.....1. ........ ........ .1...1.. .....1.. .....1.. ..1.1... ...1.... ........ ........ and .1.b.... = ........ ..1.1... ........ ........ .1...1.. ...1...1 ........ 1.....1. .1....11 ......1. Another observation we can make is that a piece that is on the border of the board doesn’t have any impact on the possibles moves.\n........ ........ ........ ........ ........ 1....... ........ .....1.. .1...1.. ........ ........ ..1.1... magic(bishop, ...1...., ........) = ........ ........ ........ ..1.1... ........ ........ .1...1.. ........ ........ 1.....1. ........ ........ ........ ........ ........ 1....... ........ .....1.. .1...1.. ........ ........ ..1.1... magic(bishop, ...1...., ........) = ........ ........ ........ ..1.1... ........ ........ .1...1.. ........ ......1. 1.....1. So we only need a mask that stop at one square before the borders.\n........ ........ ........ 1.....1. ........ ........ .1...1.. .....1.. .....1.. ..1.1... ...1.... ........ ........ and .1.b.... = ........ ..1.1... ........ ........ .1...1.. ...1...1 ........ ........ .1....11 ........ Note that for the rook this property is only applied to the end of its rays.\n........ 1..1.... ........ 1....... ........ ........ 1....... .....1.. ........ 1....... ........ ........ .111111. and r...1... = ....1... 1....... ........ ........ 1....... 1..1...1 1....... ........ .1....11 ........ The magic bitboard structure We talked a lot about reducing the key space of our map, now we’ll talk about the details of how we use a magic bitboard. One magic bitboard corresponds to one piece at one position. A magic bitboard is composed of:\nA magic number: which is a 64-bits integer A database (array) containing all the possible move for a specific piece at a specific position. The shift which is an integer inferior to 64 With those three components we can retrieve the moves for a piece thanks to the following formula (using C++ notation):\nmoves = database[((board \u0026 mask) * magic) \u003e\u003e (64 - shift)] A lot is going in this formula so let’s break it down.\n(board \u0026 mask): this part allows to retrieve only the relevant pieces from the board as explained in the previous part (board \u0026 mask) * magic: here is the tricky part, we multiply our board by some magic constant (constant by piece/position) in order to get the index of our array on the “top” of our integer (don’t worry if you don’t understand for the moment, an example is coming) (board \u0026 mask) * magic \u003e\u003e (64 - shift): The index in the database array of the move is now on the top of (board \u0026 mask) * magic, so we need to bring it down in order to get its value, the value of shift depends on the quality of the magic number database[((board \u0026 mask) * magic) \u003e\u003e (64 - shift)]: now that we have our index we only need to retrieve the corresponding moves in the database array Let’s take our bishop in d4:\n8 ........ 7 ........ 6 .....1.. 5 ...1.... 4 .1.b.... 3 ........ 2 ...1...1 1 .1....11 abcdefgh First we use a bit mask to get the relevant pieces:\n........ ........ ........ ........ 1.....1. ........ .....1.. .1...1.. .....1.. ...1.... ..1.1... ........ .1.b.... and ........ = ........ ........ ..1.1... ........ ...1...1 .1...1.. ........ .1....11 ........ ........ Now we multiply it by the magic number (here we don’t specify it, we’ll explain how to find it later) which gives use this imaginary result:\n........ 11.1.... ........ ........ .....1.. ........ ........ ........ ........ * magic = ........ ........ ........ ........ ........ ........ ........ Now let’s imagine that we have shift = 4. The third step gives us the following result:\n11.1.... ........ ........ ........ ........ ........ ........ ........ ........ \u003e\u003e 60 = ........ = 13 ........ ........ ........ ........ ........ ....11.1 Then in the database array at the index 13 we have:\n........ 1....... .1...1.. ..1.1... database[13] = ........ ..1.1... .1...1.. 1.....1. Which corresponds to the possible moves for our bishop in d4.\nBuilding the magic bitboard Pseudo code of the algorithm used to find magic bitboard:\nAgain there’s a lot going on here so let’s break it down. First we find all the possible setup of blockers of the given piece and position. Then we need to know on how many bits the index given after multiplying by the magic and shifting will be coded. It’s log2(number of blockers possition) + 1, note that log2 gives a float output, in order to be sure that we have enough place for all the possible moves of blockers we add 1 to this value and then remove the decimal part (ex: log2(5) = 2.3219 so the bits = 3 and we’re sure to have enough place for all the moves). We then initialize database and magic to default values. failed is a boolean that is set to true if the magic currently tested is not valid.\nIn the loop part we test all the possible block boards and check if the current magic is valid. A magic number is valid for a given block board if at the iteration we test the block board in the for loop the database array at the index board * magic \u003e\u003e (64 - bits) is either 0 or the corresponding move board.\nThen if the current magic is not valid we change it to another random value and clear the database.\nThis algorithm doesn’t look very smart because we test magic number randomly but finding a valid magic is fast and only done once at the start of the engine.\nImplementation of the magic bitboard TODO\nHeuristic TODO\nCredits rust-sfml Chess Programming Wiki Binary converter YT video on Bitboard Some blog about chess programming Paper on Magic Bitboard Article on Magic Bitboard Chess Programming wiki page on magic bitboard Article on Magic bitboard ",
+  "wordCount" : "2208",
+  "inLanguage": "en",
+  "datePublished": "2024-01-03T10:45:25+01:00",
+  "dateModified": "2024-01-03T10:45:25+01:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://charlyalizadeh.github.io/posts/tictacchess/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Charly's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://charlyalizadeh.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://charlyalizadeh.github.io/" accesskey="h" title="Charly&#39;s Blog (Alt + H)">Charly&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Tictacchess
+    </h1>
+    <div class="post-meta"><span title='2024-01-03 10:45:25 +0100 CET'>January 3, 2024</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p><a href="https://github.com/charlyalizadeh/TicTacChess">Github</a>
+<img loading="lazy" src="/tictacchess/screenshot_1.png"></p>
+<p>In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the <a href="https://en.wikipedia.org/wiki/Minimax">Minimax algorithm</a> and <a href="https://www.chessprogramming.org/Bitboards">bitboards optimization</a>.</p>
+<h2 id="rules-of-tictacchess">Rules of TicTacChess<a hidden class="anchor" aria-hidden="true" href="#rules-of-tictacchess">#</a></h2>
+<p>The TicTacChess is a variation of the TicTacToe which includes chess pieces instead of crosses and circles. It&rsquo;s played by 2 players on a 4x4 board, each player has four pieces including a pawn, a knight, a bishop and a rook. Each player play successively by either moving a piece, eating a enemy piece or placing a dead piece on an empty square of the board. A party is over when one of the player aligned all its pieces in a horizontal, vertical or diagonal line.</p>
+<h2 id="bitboard">Bitboard<a hidden class="anchor" aria-hidden="true" href="#bitboard">#</a></h2>
+<p>A bitboard is an integer representing a board. In regular chess a board has a dimension of <code>8 * 8 = 64</code> which is, when we think about it, kind of a big coincidence with the fact that modern computer are based of 64 bits processors. In a bitboard integer, when a bit is set at the index <code>n</code> it means that a piece occupies this square.
+In the following board an upper letter represents a white piece and a lower letter a black piece, next to it you can see a bitboard representing its occupancy (meaning that we can only retrieve information about whether a square is occupied or not but not by which piece).</p>
+<pre tabindex="0"><code> ┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓
+8┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃
+ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫
+7┃ R ┃   ┃   ┃   ┃   ┃ p ┃ k ┃   ┃
+ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫
+6┃   ┃   ┃   ┃   ┃   ┃ p ┃   ┃   ┃
+ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫
+5┃   ┃ p ┃   ┃ r ┃   ┃   ┃   ┃ p ┃
+ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫
+4┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃  8 00000000
+ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫  7 10000109
+3┃ P ┃   ┃   ┃   ┃   ┃ K ┃ P ┃   ┃  6 00000100
+ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫  5 01010001
+2┃   ┃   ┃   ┃   ┃   ┃ P ┃   ┃ P ┃  4 00000000
+ ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫  3 10000110
+1┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃  2 00000101
+ ┗━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┛  1 00000000
+   a   b   c   d   e   f   g   h      abcdefgh
+</code></pre><pre tabindex="0"><code>                            00000000&lt;--End of the integer
+                            10000110
+                            00000100
+                            01010001
+                            00000000
+                            10000110
+                            00000101
+Begginging of the integer--&gt;00000000
+</code></pre><p>To store all the information about a board we actually need multiple bitboards, one for each piece type/color.</p>
+<p>In the case of TicTacChess we doesn&rsquo;t need a full 64 integer to represent a 4x4 board. Our board has 16 squares but we cannot use a 16 bits integer, indeed when computing if four pieces are aligned we use bitshifting and AND operator like so:</p>
+<pre tabindex="0"><code>0000   0000   0000   0000   0000
+1111   0111   0011   0001   0001
+0000 &amp; 1000 &amp; 1100 &amp; 1110 = 0000
+0000   0000   0000   0000   0000
+</code></pre><p>In this case we don&rsquo;t have any problems, but let&rsquo;s analyse the following board:</p>
+<pre tabindex="0"><code>0001   0000   0000   0000   0000
+1110   1111   0111   0011   0010
+0000 &amp; 0000 &amp; 1000 &amp; 1100 = 0000
+0000   0000   0000   0000   0000
+</code></pre><p>We can see in the original board is not a winning board however our algorithm will detect a win. To overcome this issues we had a &ldquo;ghost&rdquo; column:</p>
+<pre tabindex="0"><code>00010   00001   00000   00000   00000
+11100   01110   10111   01011   00000
+00000 &amp; 00000 &amp; 00000 &amp; 10000 = 00000
+00000   00000   00000   00000   00000
+    ^
+    |
+Ghost column
+</code></pre><p>So in order to use board with a ghost column we need to take the size above 16 bits integer which is 32 bits integer, here an example:</p>
+<pre tabindex="0"><code> ┏━━━┳━━━┳━━━┳━━━┓
+4┃   ┃   ┃   ┃   ┃
+ ┣━━━╋━━━╋━━━╋━━━┫
+3┃ P ┃   ┃ p ┃   ┃
+ ┣━━━╋━━━╋━━━╋━━━┫
+2┃   ┃ k ┃ R ┃   ┃  4 00000000000000000
+ ┣━━━╋━━━╋━━━╋━━━┫  3 10100
+1┃   ┃ B ┃   ┃   ┃  2 01100
+ ┗━━━┻━━━┻━━━┻━━━┛  1 01000
+   a   b   c   d      abcd
+</code></pre><h2 id="magic-bitboard">Magic Bitboard<a hidden class="anchor" aria-hidden="true" href="#magic-bitboard">#</a></h2>
+<h3 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h3>
+<p>I&rsquo;ll use the following representation of a chess board to illustrate the magic bitboard:</p>
+<pre tabindex="0"><code>rhbqkbhr
+pppppppp
+........
+........
+........
+........
+PPPPPPPP
+RHBQKBHR
+
+Description:
+    r: black rook
+    h: black knight
+    b: black bishop
+    q: black queen
+    k: black king
+    p: black pawn
+
+    R: white rook
+    H: white knight
+    B: white bishop
+    Q: white queen
+    K: white king
+    P: white pawn
+
+    .: empty cell
+</code></pre><p>And when I&rsquo;ll talk about bitboard more specifically I&rsquo;ll use the following representation:</p>
+<pre tabindex="0"><code>                         11111111 &lt;-- end of the integer
+                         11111111
+                         ........
+                         ........
+                         ........
+                         ........
+                         11111111
+start of the integer --&gt; 11111111
+
+where . corresponds to a 0 in the 64-bits integer
+</code></pre><h3 id="why">Why<a hidden class="anchor" aria-hidden="true" href="#why">#</a></h3>
+<p>One feature of a chess engine is to know where a piece can move in function of the board state. One category of pieces is called &ldquo;sliding piece&rdquo;, this category includes the rooks, the bishops and the queen. All those pieces have the particularity that they can slide on board &ldquo;indefinitely&rdquo; until another piece or the border of the board blocks it.</p>
+<p>This characteristic makes their possible moves hard to generate. But thanks to some passionate peoples several techniques have been created that allow for fast computation of the possible moves of a sliding piece given its type, position and board state. In this tutorial we&rsquo;ll focus mainly on the technique called &ldquo;magic bitboard&rdquo;.</p>
+<h3 id="how">How<a hidden class="anchor" aria-hidden="true" href="#how">#</a></h3>
+<h4 id="key-space-reduction">Key space reduction<a hidden class="anchor" aria-hidden="true" href="#key-space-reduction">#</a></h4>
+<p>The idea behind magic bitboard is to create a map for each combination of piece type and position that contains all the possible moves for all the combination of board state. You can see a magic bitboard as a function that takes as input the piece type/position and the board state and returns the legal move for this piece.</p>
+<pre tabindex="0"><code>magic(piece_type, position, board_state) = legal_moves
+</code></pre><p>Or more visually:</p>
+<pre tabindex="0"><code>              ........  ........    ........
+              ........  ........    1.......
+              ........  .....1..    .1...1..
+              ........  ........    ..1.1...
+magic(bishop, ...1...., ........) = ........
+              ........  ........    ..1.1...
+              ........  ........    .1...1..
+              ........  ........    1.....1.
+
+Note: we don&#39;t care about the piece color when using magic bitboard.
+Indeed if the other piece on the board is of the same color we only
+need to remove the same piece color from the legal_moves (using bit operation).
+
+In this example we would obtain:
+
+........
+1.......
+.1......
+..1.1...
+........
+..1.1...
+.1...1..
+1.....1.
+</code></pre><p>As you can expect we can not store all the possible combination of piece type, position and board state in the keys of map, there are way to many of them. There are two observations we can make that&rsquo;ll let us reduce the key space drastically:</p>
+<ul>
+<li>We only need to take into account pieces that are on the trajectory (also called attacks) of the piece</li>
+<li>Some combination of piece type, position and board state have the same legal moves (see example bellow)</li>
+</ul>
+<pre tabindex="0"><code>              ........  ........    ........
+              ........  ........    1.......
+              ........  .....1..    .1...1..
+              ........  ........    ..1.1...
+magic(bishop, ...1...., ........) = ........
+              ........  ........    ..1.1...
+              ........  ........    .1...1..
+              ........  ........    1.....1.
+
+
+              ........  ........    ........
+              ........  .....1..    1.......
+              ........  ....1...    .1...1..
+              ........  ........    ..1.1...
+magic(bishop, ...1...., ........) = ........
+              ........  ........    ..1.1...
+              ........  ........    .1...1..
+              ........  ........    1.....1.
+
+
+              ........  .......1    ........
+              ........  ........    1.......
+              ........  .....1..    .1...1..
+              ........  ........    ..1.1...
+magic(bishop, ...1...., ........) = ........
+              ........  ........    ..1.1...
+              ........  ........    .1...1..
+              ........  ........    1.....1.
+</code></pre><p>In order to use the first observation at our advantage we use <a href="https://en.wikipedia.org/wiki/Mask_(computing)">bit masking</a> to get only the relevant pieces of board.</p>
+<p>For example let&rsquo;s take the following board with a bishop on d4 (<code>1</code> denotes a piece, we don&rsquo;t care which one in this example):</p>
+<pre tabindex="0"><code>8 ........
+7 ........
+6 .....1..
+5 ...1....
+4 .1.b....
+3 ........
+2 ...1...1
+1 .1....11
+  abcdefgh
+</code></pre><p>On this board the only relevant pieces in order to get the bishop moves are the ones on its diagonals, i.e:</p>
+<pre tabindex="0"><code>8 .......1
+7 1.....1.
+6 .1...1..
+5 ..1.1...
+4 ........
+3 ..1.1...
+2 .1...1..
+1 1.....1.
+  abcdefgh
+</code></pre><p>To get the board with only the relevant pieces we use the bitwise <code>and</code> operator (also denoted <code>&amp;</code> in C/C++)</p>
+<pre tabindex="0"><code> .......1     ........   ........
+ 1.....1.     ........   ........
+ .1...1..     .....1..   .....1..
+ ..1.1...     ...1....   ........
+ ........ and .1.b.... = ........
+ ..1.1...     ........   ........
+ .1...1..     ...1...1   ........
+ 1.....1.     .1....11   ......1.
+</code></pre><p>Another observation we can make is that a piece that is on the border of the board doesn&rsquo;t have any impact on the possibles moves.</p>
+<pre tabindex="0"><code>              ........  ........    ........
+              ........  ........    1.......
+              ........  .....1..    .1...1..
+              ........  ........    ..1.1...
+magic(bishop, ...1...., ........) = ........
+              ........  ........    ..1.1...
+              ........  ........    .1...1..
+              ........  ........    1.....1.
+
+
+              ........  ........    ........
+              ........  ........    1.......
+              ........  .....1..    .1...1..
+              ........  ........    ..1.1...
+magic(bishop, ...1...., ........) = ........
+              ........  ........    ..1.1...
+              ........  ........    .1...1..
+              ........  ......1.    1.....1.
+</code></pre><p>So we only need a mask that stop at one square before the borders.</p>
+<pre tabindex="0"><code> ........     ........   ........
+ 1.....1.     ........   ........
+ .1...1..     .....1..   .....1..
+ ..1.1...     ...1....   ........
+ ........ and .1.b.... = ........
+ ..1.1...     ........   ........
+ .1...1..     ...1...1   ........
+ ........     .1....11   ........
+</code></pre><p>Note that for the rook this property is only applied to the end of its rays.</p>
+<pre tabindex="0"><code> ........     1..1....   ........
+ 1.......     ........   ........
+ 1.......     .....1..   ........
+ 1.......     ........   ........
+ .111111. and r...1... = ....1...
+ 1.......     ........   ........
+ 1.......     1..1...1   1.......
+ ........     .1....11   ........
+</code></pre><h4 id="the-magic-bitboard-structure">The magic bitboard structure<a hidden class="anchor" aria-hidden="true" href="#the-magic-bitboard-structure">#</a></h4>
+<p>We talked a lot about reducing the key space of our map, now we&rsquo;ll talk about the details of how we use a magic bitboard.
+One magic bitboard corresponds to one piece at one position. A magic bitboard is composed of:</p>
+<ul>
+<li><strong>A magic number</strong>: which is a 64-bits integer</li>
+<li><strong>A database</strong> (array) containing all the possible move for a specific piece at a specific position.</li>
+<li><strong>The shift</strong> which is an integer inferior to 64</li>
+</ul>
+<p>With those three components we can retrieve the moves for a piece thanks to the following formula (using C++ notation):</p>
+<pre tabindex="0"><code>moves = database[((board &amp; mask) * magic) &gt;&gt; (64 - shift)]
+</code></pre><p>A lot is going in this formula so let&rsquo;s break it down.</p>
+<ul>
+<li><code>(board &amp; mask)</code>: this part allows to retrieve only the relevant pieces from the board as explained in the previous part</li>
+<li><code>(board &amp; mask) * magic</code>: here is the tricky part, we multiply our board by some magic constant (constant by piece/position) in order to get the index of our array on the &ldquo;top&rdquo; of our integer (don&rsquo;t worry if you don&rsquo;t understand for the moment, an example is coming)</li>
+<li><code>(board &amp; mask) * magic &gt;&gt; (64 - shift)</code>: The index in the <code>database</code> array of the move is now on the top of <code>(board &amp; mask) * magic</code>, so we need to bring it down in order to get its value, the value of shift depends on the quality of the <em>magic number</em></li>
+<li><code>database[((board &amp; mask) * magic) &gt;&gt; (64 - shift)]</code>: now that we have our index we only need to retrieve the corresponding moves in the database array</li>
+</ul>
+<p>Let&rsquo;s take our bishop in d4:</p>
+<pre tabindex="0"><code>8 ........
+7 ........
+6 .....1..
+5 ...1....
+4 .1.b....
+3 ........
+2 ...1...1
+1 .1....11
+  abcdefgh
+</code></pre><p>First we use a bit mask to get the relevant pieces:</p>
+<pre tabindex="0"><code> ........     ........   ........
+ ........     1.....1.   ........
+ .....1..     .1...1..   .....1..
+ ...1....     ..1.1...   ........
+ .1.b.... and ........ = ........
+ ........     ..1.1...   ........
+ ...1...1     .1...1..   ........
+ .1....11     ........   ........
+</code></pre><p>Now we multiply it by the magic number (here we don&rsquo;t specify it, we&rsquo;ll explain how to find it later) which gives use this imaginary result:</p>
+<pre tabindex="0"><code>........           11.1....
+........           ........
+.....1..           ........
+........           ........
+........ * magic = ........
+........           ........
+........           ........
+........           ........
+</code></pre><p>Now let&rsquo;s imagine that we have <code>shift = 4</code>. The third step gives us the following result:</p>
+<pre tabindex="0"><code>11.1....         ........
+........         ........
+........         ........
+........         ........
+........ &gt;&gt; 60 = ........ = 13
+........         ........
+........         ........
+........         ....11.1
+</code></pre><p>Then in the <code>database</code> array at the index <code>13</code> we have:</p>
+<pre tabindex="0"><code>               ........
+               1.......
+               .1...1..
+               ..1.1...
+database[13] = ........
+               ..1.1...
+               .1...1..
+               1.....1.
+</code></pre><p>Which corresponds to the possible moves for our bishop in d4.</p>
+<h4 id="building-the-magic-bitboard">Building the magic bitboard<a hidden class="anchor" aria-hidden="true" href="#building-the-magic-bitboard">#</a></h4>
+<p>Pseudo code of the algorithm used to find magic bitboard:</p>
+<p><img loading="lazy" src="/tictacchess/find_magic"></p>
+<p>Again there&rsquo;s a lot going on here so let&rsquo;s break it down.
+First we find all the possible setup of blockers of the given piece and position. Then we need to know on how many bits the index given after multiplying by the magic and shifting will be coded. It&rsquo;s <code>log2(number of blockers possition) + 1</code>, note that <code>log2</code> gives a float output, in order to be sure that we have enough place for all the possible moves of blockers we add 1 to this value and then remove the decimal part (ex: <code>log2(5) = 2.3219</code> so the <code>bits = 3</code> and we&rsquo;re sure to have enough place for all the moves). We then initialize <code>database</code> and <code>magic</code> to default values. <code>failed</code> is a boolean that is set to <code>true</code> if the magic currently tested is not valid.</p>
+<p>In the loop part we test all the possible block boards and check if the current <code>magic</code> is valid. A <code>magic</code> number is valid for a given block board if at the iteration we test the block board in the <code>for</code> loop the <code>database</code> array at the index <code>board * magic &gt;&gt; (64 - bits)</code> is either 0 or the corresponding move board.</p>
+<p>Then if the current <code>magic</code> is not valid we change it to another random value and clear the <code>database</code>.</p>
+<p>This algorithm doesn&rsquo;t look very smart because we test magic number randomly but finding a valid magic is fast and only done once at the start of the engine.</p>
+<h3 id="implementation-of-the-magic-bitboard">Implementation of the magic bitboard<a hidden class="anchor" aria-hidden="true" href="#implementation-of-the-magic-bitboard">#</a></h3>
+<p>TODO</p>
+<h2 id="heuristic">Heuristic<a hidden class="anchor" aria-hidden="true" href="#heuristic">#</a></h2>
+<p>TODO</p>
+<h2 id="credits">Credits<a hidden class="anchor" aria-hidden="true" href="#credits">#</a></h2>
+<ul>
+<li><a href="https://github.com/jeremyletang/rust-sfml">rust-sfml</a></li>
+<li><a href="https://www.chessprogramming.org/Main_Page">Chess Programming Wiki</a></li>
+<li><a href="https://www.binaryhexconverter.com/binary-to-decimal-converter">Binary converter</a></li>
+<li><a href="https://www.youtube.com/watch?v=MzfQ8H16n0M&amp;">YT video on Bitboard</a></li>
+<li><a href="https://peterellisjones.com/posts/generating-legal-chess-moves-efficiently/">Some blog about chess programming</a></li>
+<li><a href="http://pradu.us/old/Nov27_2008/Buzz/research/magic/Bitboards.pdf">Paper on Magic Bitboard</a></li>
+<li><a href="https://essays.jwatzman.org/essays/chess-move-generation-with-magic-bitboards.html">Article on Magic Bitboard</a></li>
+<li><a href="https://www.chessprogramming.org/Magic_Bitboards">Chess Programming wiki page on magic bitboard</a></li>
+<li><a href="http://www.vicki-chess.blogspot.com/2013/04/magics.html">Article on Magic bitboard</a></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://charlyalizadeh.github.io/">Charly&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
