@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>https://example.org/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Jan 2024 10:45:25 +0100</lastBuildDate>
+    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tictacchess</title>
+      <link>https://example.org/posts/tictacchess/</link>
+      <pubDate>Wed, 03 Jan 2024 10:45:25 +0100</pubDate>
+      <guid>https://example.org/posts/tictacchess/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/charlyalizadeh/TicTacChess&#34;&gt;Github&lt;/a&gt;&#xA;&lt;img src=&#34;https://example.org/tictacchess/screenshot_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Minimax&#34;&gt;Minimax algorithm&lt;/a&gt; and &lt;a href=&#34;https://www.chessprogramming.org/Bitboards&#34;&gt;bitboards optimization&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;rules-of-tictacchess&#34;&gt;Rules of TicTacChess&lt;/h2&gt;&#xA;&lt;p&gt;The TicTacChess is a variation of the TicTacToe which includes chess pieces instead of crosses and circles. It&amp;rsquo;s played by 2 players on a 4x4 board, each player has four pieces including a pawn, a knight, a bishop and a rook. Each player play successively by either moving a piece, eating a enemy piece or placing a dead piece on an empty square of the board. A party is over when one of the player aligned all its pieces in a horizontal, vertical or diagonal line.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hicks&#39; hexagon</title>
+      <link>https://example.org/posts/hickshexagon/</link>
+      <pubDate>Tue, 02 Jan 2024 16:48:01 +0100</pubDate>
+      <guid>https://example.org/posts/hickshexagon/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://example.org/hickshexagon/TheShining.png&#34; alt=&#34;The Shining pattern&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/charlyalizadeh/p5_pattern/tree/master/src/hicks_hexagon&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;The Hicks&amp;rsquo; Hexagon is a pattern created by &lt;a href=&#34;https://en.wikipedia.org/wiki/David_Hicks_(designer)&#34;&gt;David Hicks&lt;/a&gt; in the 1960s. It got popular in the Stanley Kubrick&amp;rsquo;s movie &lt;a href=&#34;https://en.wikipedia.org/wiki/The_Shining_(film)&#34;&gt;The Shining&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Thanks to &lt;a href=&#34;https://p5js.org/&#34;&gt;p5js&lt;/a&gt; I implemented a generalization of this pattern.&lt;/p&gt;&#xA;&lt;h2 id=&#34;drawing-an-hexagon&#34;&gt;Drawing an hexagon&lt;/h2&gt;&#xA;&lt;p&gt;First we need to create an hexagon class. In my code I chose to define an hexagon by four metrics: its origin, its width, its height and the height of its up and down triangles.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
