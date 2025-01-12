@@ -5,8 +5,9 @@ draft = false
 +++
 
 [Github](https://github.com/charlyalizadeh/TicTacChess)
-{{ $image := .Resources.Get "tictacchess.jpg" }}
 
+{{ $tictacchess := .Resources.Get "tictacchess.png" }}
+<img src="{{ $tictacchess.RelPermalink }}" width="{{ $tictacchess.Width }}" height="{{ $tictacchess.Height }}">
 
 In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the [Minimax algorithm](https://en.wikipedia.org/wiki/Minimax) and [bitboards optimization](https://www.chessprogramming.org/Bitboards).
 
@@ -413,7 +414,8 @@ Which corresponds to the possible moves for our bishop in d4.
 
 Pseudo code of the algorithm used to find magic bitboard:
 
-{{ $image := .Resources.Get "find_magic.jpg" }}
+{{ $find_magic := .Resources.Get "find_magic.png" }}
+<img src="{{ $find_magic.RelPermalink }}" width="{{ $find_magic.Width }}" height="{{ $find_magic.Height }}">
 
 Again there's a lot going on here so let's break it down.
 First we find all the possible setup of blockers of the given piece and position. Then we need to know on how many bits the index given after multiplying by the magic and shifting will be coded. It's `log2(number of blockers possition) + 1`, note that `log2` gives a float output, in order to be sure that we have enough place for all the possible moves of blockers we add 1 to this value and then remove the decimal part (ex: `log2(5) = 2.3219` so the `bits = 3` and we're sure to have enough place for all the moves). We then initialize `database` and `magic` to default values. `failed` is a boolean that is set to `true` if the magic currently tested is not valid.
