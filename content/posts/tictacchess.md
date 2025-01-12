@@ -5,7 +5,7 @@ draft = false
 +++
 
 [Github](https://github.com/charlyalizadeh/TicTacChess)
-![](/images/tictacchess.png)
+![](static/images/tictacchess.png)
 
 
 In this project I built an artificial intelligence that can play the game of Tic Tac Chess thanks to the [Minimax algorithm](https://en.wikipedia.org/wiki/Minimax) and [bitboards optimization](https://www.chessprogramming.org/Bitboards).
@@ -413,7 +413,7 @@ Which corresponds to the possible moves for our bishop in d4.
 
 Pseudo code of the algorithm used to find magic bitboard:
 
-![](/images/find_magic)
+![](static/images/find_magic)
 
 Again there's a lot going on here so let's break it down.
 First we find all the possible setup of blockers of the given piece and position. Then we need to know on how many bits the index given after multiplying by the magic and shifting will be coded. It's `log2(number of blockers possition) + 1`, note that `log2` gives a float output, in order to be sure that we have enough place for all the possible moves of blockers we add 1 to this value and then remove the decimal part (ex: `log2(5) = 2.3219` so the `bits = 3` and we're sure to have enough place for all the moves). We then initialize `database` and `magic` to default values. `failed` is a boolean that is set to `true` if the magic currently tested is not valid.
